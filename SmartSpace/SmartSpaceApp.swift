@@ -12,7 +12,8 @@ import SwiftData
 struct SmartSpaceApp: App {
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
-            Item.self,
+            Space.self,
+            SpaceBlock.self
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
