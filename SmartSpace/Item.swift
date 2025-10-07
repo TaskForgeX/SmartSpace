@@ -16,6 +16,7 @@ final class Space {
     var mode: SpaceMode
 
     var blocks: [SpaceBlock]?
+    var attachments: [SpaceAttachment] = []
 
     init(name: String, createdAt: Date = .now, type: SpaceType, mode: SpaceMode) {
         self.name = name
@@ -40,6 +41,29 @@ final class SpaceBlock {
         self.details = details
         self.kind = kind
         self.createdAt = createdAt
+    }
+}
+
+@Model
+final class SpaceAttachment {
+    var originalFileName: String
+    var storedFileName: String
+    var languageCode: String?
+    var addedAt: Date
+
+    @Relationship(inverse: \Space.attachments)
+    var space: Space?
+
+    init(
+        originalFileName: String,
+        storedFileName: String,
+        languageCode: String?,
+        addedAt: Date = .now
+    ) {
+        self.originalFileName = originalFileName
+        self.storedFileName = storedFileName
+        self.languageCode = languageCode
+        self.addedAt = addedAt
     }
 }
 
@@ -79,4 +103,3 @@ extension SpaceBlock {
         var id: String { rawValue }
     }
 }
-
